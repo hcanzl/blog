@@ -6,6 +6,9 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
+  # Berksfile
+  config.berkshelf.enabled = true
+
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "base"
 
@@ -16,7 +19,8 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network :forwarded_port, guest: 80, host: 8080
+    config.vm.network :forwarded_port, guest: 80, host: 8080
+  #config.vm.forward_port 80, 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -76,14 +80,7 @@ Vagrant.configure("2") do |config|
   # some recipes and/or roles.
   #
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "../my-recipes/cookbooks"
-    chef.roles_path = "../my-recipes/roles"
-    chef.data_bags_path = "../my-recipes/data_bags"
-    chef.add_recipe "mysql"
-    chef.add_role "web"
-
-    # You may also specify custom JSON attributes:
-    chef.json = { :mysql_password => "foo" }
+    chef.add_recipe "apache2"
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,
