@@ -42,3 +42,7 @@ group :test, :development do
   gem 'pry-rails'
   gem 'factory_girl'
 end
+
+group :development do
+  gem 'capistrano'
+end
