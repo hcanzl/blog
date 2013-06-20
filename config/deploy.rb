@@ -1,3 +1,8 @@
+require 'bundler/capistrano'
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+set :rvm_type, :user
+require 'rvm/capistrano'
+
 set :application, "blog"
 set :repository,  "git@github.com:hcanzl/blog.git"
 
@@ -9,8 +14,10 @@ role :app, "localhost"                          # This may be the same as your `
 role :db,  "localhost", :primary => true # This is where Rails migrations will run
 set :port, 2222
 set :user, "vagrant"
-set :deply_to, "/home/vagrant/sites/blog"
+set :deploy_to, "/home/vagrant/sites/blog"
 set :keep_releases, 5
+set :use_sudo, false
+
 #role :db,  "your slave db-server here"
 
 # if you want to clean up old releases on each deploy uncomment this:
@@ -28,4 +35,3 @@ namespace :deploy do
   end
 end
 
-set :use_sudo false
